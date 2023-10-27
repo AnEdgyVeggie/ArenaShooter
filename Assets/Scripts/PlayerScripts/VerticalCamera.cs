@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class VerticalCamera : MonoBehaviour
@@ -7,14 +8,20 @@ public class VerticalCamera : MonoBehaviour
 
     Player _player;
     [SerializeField]
-    float _sensitivity;
-    
+    float _sensitivity, _xRotation = 0;
+
+    private Transform rotation;
+
     // Start is called before the first frame update
     void Start()
     {
         _player = GetComponentInParent<Player>();
-        if (_player == null) { Debug.LogError("PLAYER IS NULL IN " + this); }
-        //transform.rotation = Quaternion.Euler(0, 0, 0);
+        if (_player == null) { Debug.LogError($"PLAYER IS NULL IN  {this.name.ToUpper()}"); }
+        
+        rotation = GetComponent<Transform>();
+        if (rotation == null) { Debug.LogError($"ROTATION IS NULL IN {this.name.ToUpper() }"); }
+
+        _sensitivity = _player.GetSensitivity() * 2; 
     }
 
     // Update is called once per frame
@@ -25,23 +32,14 @@ public class VerticalCamera : MonoBehaviour
 
     void CalculateCamera()
     {
-        float lowerBound = 0.60f, upperBound = -0.60f;
-        float verticalLook = Input.GetAxisRaw("Mouse Y");
-        _sensitivity = _player.GetSensitivity() * 2;
+        float mouseY = Input.GetAxis("Mouse Y") * _sensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * _sensitivity;
 
-        if (transform.rotation.x >= lowerBound && verticalLook < 0)
-        {
-            //Debug.LogError(transform.rotation.x);
-            _sensitivity = 0;
-            return;
-        }
-        if (transform.rotation.x <= upperBound && verticalLook > 0)
-        {
-            //Debug.Log(transform.eulerAngles.x);
-            _sensitivity = 0;
-            return;
-        }
-        transform.Rotate(-verticalLook * _sensitivity, 0, 0);
+        _xRotation -= mouseY;
+        _xRotation = Mathf.Clamp(_xRotation, -80f, 80f);
+
+        transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+        rotation.Rotate(Vector3.up * mouseX);
        
     }
 }
