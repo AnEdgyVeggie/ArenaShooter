@@ -21,7 +21,7 @@ public class VerticalCamera : MonoBehaviour
         rotation = GetComponent<Transform>();
         if (rotation == null) { Debug.LogError($"ROTATION IS NULL IN {this.name.ToUpper() }"); }
 
-        _sensitivity = _player.GetSensitivity() * 2; 
+        _sensitivity = _player.GetSensitivity() * Time.deltaTime; 
     }
 
     // Update is called once per frame
@@ -32,14 +32,14 @@ public class VerticalCamera : MonoBehaviour
 
     void CalculateCamera()
     {
-        float mouseY = Input.GetAxis("Mouse Y") * _sensitivity;
-        float mouseX = Input.GetAxis("Mouse X") * _sensitivity;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * _sensitivity;
+        float mouseX = Input.GetAxisRaw("Mouse X") * _sensitivity;
 
         _xRotation -= mouseY;
         _xRotation = Mathf.Clamp(_xRotation, -80f, 80f);
 
         transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-        rotation.Rotate(Vector3.up * mouseX);
-       
+        /*  rotation.Rotate(Vector3.up * mouseX);*/
+
     }
 }

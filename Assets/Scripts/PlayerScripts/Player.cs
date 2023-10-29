@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    float _playerSpeed = 3, _lookSensitivity = 5, _jumpHeight = 1, _gravity = -9.81f;
+    float _playerSpeed = 3, _lookSensitivity = 100, _jumpHeight = 1, _gravity = -9.81f;
     [SerializeField]
     bool _isGrounded = true, _canSpecialJump = false;
     Vector3 _playerVelocity;
@@ -74,8 +74,8 @@ public class Player : MonoBehaviour
 
     void CalculateRotation()
     {
-        float horizontalLook = Input.GetAxisRaw("Mouse X");
-        transform.Rotate(0, horizontalLook * _lookSensitivity, 0);
+        float horizontalLook = Input.GetAxis("Mouse X");
+        transform.Rotate(0, horizontalLook * _lookSensitivity * Time.deltaTime, 0);
     }
 
     IEnumerator SetSpecialJumpRoutine()
