@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fireball : MonoBehaviour
+public class fireballBody : MonoBehaviour
 {
     [SerializeField]
     float rotation = 1800;
