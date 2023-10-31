@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 9151301905211248282}
   - component: {fileID: 2053911510178371729}
   - component: {fileID: 6249134869611618707}
+  - component: {fileID: 4765346627952358083}
   m_Layer: 0
   m_Name: DragonHead
-  m_TagString: Untagged
+  m_TagString: DragonHead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,3 +110,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.015247651, y: 0.0183282, z: 0.012086085}
   m_Center: {x: 0.0057382695, y: -0.0019565301, z: -0.00013993296}
+--- !u!114 &4765346627952358083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4522059812244256973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d06ff32d3694ee04eb902779bba105ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fireball: {fileID: 6460519031336962569, guid: 57b8d32b2d48580418231f2bf42d67e1, type: 3}
+  _spawnSpeed: 4
+  _start: 0
+  _startLimit: 5
